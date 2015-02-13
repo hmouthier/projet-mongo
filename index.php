@@ -23,7 +23,7 @@ href="http://openlayers.org/en/v3.1.1/css/ol.css" type="text/css">
   <body >
    
     <div id="map" class="map"></div>
-    
+    <p id='id01'>hello</p>
 
 
     <script type="text/javascript">
@@ -117,15 +117,34 @@ function lancementopenlayer(){
                         zoom: zoom
                     })
                 });
+
+
+            map.on("click", function(e) {
+        map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+            var mafeature=feature.o.name;
+            $.getJSON("element.php",    // le fichier qui recevera la requête
+                              {hhh: mafeature},  
+                              function(return_json){  // la fonction qui traitera l'objet reçu
+                               
+
+                                document.getElementById("id01").innerHTML = "hello "+return_json["effectif_S"]+" toto";
+                              }
+                    );
+            
+            
+        })
+    });
+
+
 }
 
 
 
                 
 
-        var data=$.getJSON("bd.php",    // le fichier qui recevera la requête
+        $.getJSON("bd.php",    // le fichier qui recevera la requête
                               {},  // les paramètres en entrée 6.0003 45.9994
-                              function(return_json){                                      // la fonction qui traitera l'objet reçu
+                              function(return_json){  // la fonction qui traitera l'objet reçu
                                
 
                                 console.log( return_json );
@@ -134,13 +153,8 @@ function lancementopenlayer(){
                                     data=return_json[id];
                                      createcircle(parseFloat(data["Y"]),parseFloat(data["X"]),10,data["numero"],parseInt(data["reussite"]));
                                 
-
                                 }
-
                                 lancementopenlayer();
-                               
-                                  
-
                               }
                     );
         
