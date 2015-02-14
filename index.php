@@ -6,13 +6,30 @@ href="http://openlayers.org/en/v3.1.1/css/ol.css" type="text/css">
     <style>
       .map {
         height: 800px;
-        width: 100%;
+        width: 70%;
+        display: inline-block;
       }
+
+section
+{
+    display: inline-block;    
+    border: 1px solid blue;
+    width: 29%;
+    vertical-align: top;
+}
+
+
+
+
+.Degrade {
+background-image:linear-gradient(to right,#00FF00, black);
+}
     </style>
     <script src="http://openlayers.org/en/v3.1.1/build/ol.js" type="text/javascript"></script>
     <title>OpenLayers </title>
  <script src="ajax.js" type="text/javascript"></script>
     <script src="jquery.js" type="text/javascript"></script>
+    <script src="camenbert.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
      
 
@@ -23,7 +40,24 @@ href="http://openlayers.org/en/v3.1.1/css/ol.css" type="text/css">
   <body >
    
     <div id="map" class="map"></div>
-    <p id='id01'>hello</p>
+    <section>
+    <h1>Lycées de France</h1>
+    <p>Le rouge indique un lycée ayant un taux de réussite inferieur à 80%</p>
+    <div class="Degrade">
+
+  <p  align="center">Réussite supérieur à 80%</p>
+</div>
+
+
+   <p id="id01"></p>
+   <p id="id02"></p>
+   <p id="id03"></p>
+   <p id="id04"></p>
+   <p id="id05"></p>
+  <!--   <canvas id="camembert"  height="400"></canvas>
+    <canvas id="diagramme"  height="400"></canvas> -->
+    </section>
+    
 
 
     <script type="text/javascript">
@@ -123,11 +157,38 @@ function lancementopenlayer(){
         map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
             var mafeature=feature.o.name;
             $.getJSON("element.php",    // le fichier qui recevera la requête
-                              {hhh: mafeature},  
+                              {"numero": mafeature},  
                               function(return_json){  // la fonction qui traitera l'objet reçu
-                               
-
-                                document.getElementById("id01").innerHTML = "hello "+return_json["effectif_S"]+" toto";
+                               for (var id in return_json) { 
+                                    if (id==0){
+                                    data=return_json[id];
+                                    document.getElementById("id01").innerHTML = data["appellation_officielle_uai"];
+                                    }else {
+                                        data=return_json[id];
+                                    document.getElementById("id02").innerHTML ="Réussite totale de "+ data["reussite_total"]+"% pour un effectif de "+data["effectif_total"]+" élèves.";
+                                   document.getElementById("id03").innerHTML ="Réussite en série S de "+ data["reussite_S"]+"% pour un effectif de "+data["effectif_S"]+" élèves.";
+                                   document.getElementById("id04").innerHTML ="Réussite en série ES de "+ data["reussite_ES"]+"% pour un effectif de "+data["effectif_ES"]+" élèves.";
+                                   document.getElementById("id05").innerHTML ="Réussite en série L de "+ data["reussite_L"]+"% pour un effectif de "+data["effectif_L"]+" élèves.";
+                                   
+                                    }
+                                }
+// "effectif_L",
+//              "effectif_ES",
+//              "effectif_S",
+//              "effectif_STG",
+//              "effectif_STI",
+//              "effectif_STL",
+//              "effectif_ST2S",
+//              "effectif_total",
+//              "reussite_L",
+//              "reussite_ES",
+//              "reussite_S",
+//              "reussite_STG",
+//              "reussite_STI",
+//              "reussite_STL",
+//              "reussite_ST2S",
+//              "reussite_total"
+                                // document.getElementById("id01").innerHTML = "hello "+return_json["effectif_S"]+" toto";
                               }
                     );
             
