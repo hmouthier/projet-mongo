@@ -27,9 +27,9 @@ background-image:linear-gradient(to right,#00FF00, black);
     </style>
     <script src="http://openlayers.org/en/v3.1.1/build/ol.js" type="text/javascript"></script>
     <title>OpenLayers </title>
- <script src="ajax.js" type="text/javascript"></script>
-    <script src="jquery.js" type="text/javascript"></script>
-    <script src="camenbert.js" type="text/javascript"></script>
+ <script src="js/ajax.js" type="text/javascript"></script>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/camenbert.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
      
 
@@ -156,7 +156,7 @@ function lancementopenlayer(){
             map.on("click", function(e) {
         map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
             var mafeature=feature.o.name;
-            $.getJSON("element.php",    // le fichier qui recevera la requête
+            $.getJSON("php/element.php",    // le fichier qui recevera la requête
                               {"numero": mafeature},  
                               function(return_json){  // la fonction qui traitera l'objet reçu
                                for (var id in return_json) { 
@@ -203,7 +203,7 @@ function lancementopenlayer(){
 
                 
 
-        $.getJSON("bd.php",    // le fichier qui recevera la requête
+        $.getJSON("php/bd.php",    // le fichier qui recevera la requête
                               {},  // les paramètres en entrée 6.0003 45.9994
                               function(return_json){  // la fonction qui traitera l'objet reçu
                                
