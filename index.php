@@ -172,23 +172,6 @@ function lancementopenlayer(){
                                    
                                     }
                                 }
-// "effectif_L",
-//              "effectif_ES",
-//              "effectif_S",
-//              "effectif_STG",
-//              "effectif_STI",
-//              "effectif_STL",
-//              "effectif_ST2S",
-//              "effectif_total",
-//              "reussite_L",
-//              "reussite_ES",
-//              "reussite_S",
-//              "reussite_STG",
-//              "reussite_STI",
-//              "reussite_STL",
-//              "reussite_ST2S",
-//              "reussite_total"
-                                // document.getElementById("id01").innerHTML = "hello "+return_json["effectif_S"]+" toto";
                               }
                     );
             
